@@ -1,0 +1,31 @@
+
+digraph finite_state_machine {
+    rankdir=LR;
+    graph [fontname = "arial"];
+    node [fontname = "arial"];
+    edge [fontname = "arial"];
+
+    node [shape = point ]; ready
+    node [shape = point ]; enter
+    node [shape = doublecircle, label="créée", fontsize=14] created;
+
+    node [shape = circle, label="attente\npaiement", fontsize=10] waiting_payment;
+    node [shape = circle, label="payée", fontsize=10] paid ;
+    node [shape = circle, label="acceptée", fontsize=10] accepted ;
+    node [shape = circle, label="prête à\npréparer", fontsize=10] waiting_picking;
+    node [shape = circle, label="en\npréparation", fontsize=10] picking ;
+    node [shape = circle, label="prête à\nlivrer", fontsize=10] waiting_delivery;
+    node [shape = circle, label="en\nlivraison", fontsize=10] delivering ;
+    node [shape = doublecircle, label="livrée", fontsize=12] done;
+
+    enter -> created ;
+    created -> waiting_payment [label = "recevoir commande"];
+    waiting_payment -> paid [label = "payer commande"];
+    paid -> accepted [label = "vérifier paiement"];
+    ready -> waiting_picking;
+    waiting_picking -> picking [label = "commencer picking"];
+    picking -> waiting_delivery [label = "terminer picking"];
+    waiting_delivery -> delivering [label = "commencer livraison"];
+    delivering -> done [label = "livrer commande"] ;
+}
+

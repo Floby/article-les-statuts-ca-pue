@@ -1,0 +1,35 @@
+
+digraph finite_state_machine {
+    rankdir=LR;
+    graph [fontname = "arial"];
+    node [fontname = "arial"];
+    edge [fontname = "arial"];
+
+    node [shape = point ] ready;
+    node [shape = point ] abort;
+
+    node [shape = circle, label="prête à\nlivrer", fontsize=10] waiting_delivery;
+    node [shape = circle, label="en\nlivraison", fontsize=10] delivering ;
+    node [shape = doublecircle, label="livrée", fontsize=12] done;
+    node [shape = circle, label="dest.\nabsent", fontsize=12] no_one_home;
+
+    ready -> waiting_delivery
+    waiting_delivery -> delivering ;
+    delivering -> done  ;
+    delivering -> no_one_home  ;
+    no_one_home -> waiting_delivery  ;
+    no_one_home -> abort  ;
+
+    waiting_delivery -> done [ color="red" ];
+    waiting_delivery -> no_one_home [ color="red" ];
+    delivering -> waiting_delivery [ color="red" ];
+    done -> waiting_delivery [ color="red" ];
+    done -> delivering [ color="red" ];
+    done -> no_one_home [ color="red" ];
+    no_one_home -> done [ color="red" ];
+    no_one_home -> delivering [ color="red" ];
+}
+
+
+
+

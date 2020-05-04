@@ -1,0 +1,32 @@
+
+digraph finite_state_machine {
+    rankdir=LR;
+    graph [fontname = "arial"];
+    node [fontname = "arial"];
+    edge [fontname = "arial"];
+
+    node [shape = point ] ready;
+    node [shape = point ] buy;
+    node [shape = point ] abort;
+
+    node [shape = circle, label="prête à\npréparer", fontsize=10] waiting_picking;
+    node [shape = circle, label="en\npréparation", fontsize=10] picking ;
+    node [shape = circle, label="stock\nmanquant", fontsize=10] no_stock ;
+    node [shape = circle, label="prête à\nlivrer", fontsize=10] waiting_delivery;
+    node [shape = circle, label="en\nlivraison", fontsize=10] delivering ;
+    node [shape = doublecircle, label="livrée", fontsize=12] done;
+    node [shape = circle, label="dest.\nabsent", fontsize=12] no_one_home;
+
+    ready -> waiting_picking;
+    waiting_picking -> picking [label = "commencer picking"] ;
+    picking -> waiting_delivery [label = "terminer picking"] ;
+    picking -> no_stock [label = "relever un manque"] ;
+    no_stock -> buy [label = "commander ???"] ;
+    waiting_delivery -> delivering [label = "commencer livraison"];
+    delivering -> done [label = "livrer commande"] ;
+    delivering -> no_one_home [label = "Signaler absence"] ;
+    no_one_home -> waiting_delivery [label = "replanifier livraison"] ;
+    no_one_home -> abort [label = "annuler commande"] ;
+}
+
+

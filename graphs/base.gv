@@ -1,0 +1,27 @@
+digraph finite_state_machine {
+    rankdir=LR;
+    graph [fontname = "arial"];
+    node [fontname = "arial"];
+    edge [fontname = "arial"];
+
+    size="8,5"
+    node [shape = point ]; enter
+    node [shape = doublecircle, label="créée", fontsize=14] created;
+
+    node [shape = circle, label="en\nattente", fontsize=10] waiting;
+    node [shape = circle, label="payée", fontsize=10] paid ;
+    node [shape = circle, label="acceptée", fontsize=10] accepted ;
+    node [shape = circle, label="en\npréparation", fontsize=10] picking ;
+    node [shape = circle, label="en\nlivraison", fontsize=10] delivering ;
+    node [shape = doublecircle, label="livrée", fontsize=12] done;
+
+    enter -> created;
+    created -> waiting;
+    waiting -> paid;
+    paid -> accepted;
+    accepted -> waiting;
+    waiting -> picking;
+    picking -> waiting;
+    waiting -> delivering;
+    delivering -> done;
+}

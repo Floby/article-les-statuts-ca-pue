@@ -5,13 +5,15 @@ help: ## Show this help
 
 build: html images ## Build landing pages inside ./dist/
 
-html: 
+html: dist/index.html
+
+dist/index.html: ./article.md
 	@mkdir -p dist
 	npx marked -o dist/index.html article.md
 
-GRAPH_STYLE := $(wildcard graphs/*.gv)
-DIST_STYLE := $(patsubst graphs/%.gv,dist/%.png,$(GRAPH_STYLE))
-images: $(DIST_STYLE)
+GRAPH_GRAPH := $(wildcard graphs/*.gv)
+DIST_GRAPH := $(patsubst graphs/%.gv,dist/%.png,$(GRAPH_GRAPH))
+images: $(DIST_GRAPH)
 
 dist/%.png: graphs/%.gv
 	@mkdir -p dist

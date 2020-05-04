@@ -21,7 +21,7 @@ digraph finite_state_machine {
     waiting_picking -> picking [label = "commencer picking"] ;
     picking -> waiting_delivery [label = "terminer picking"] ;
     picking -> no_stock [label = "relever un manque"] ;
-    no_stock -> buy [label = "commander ???"] ;
+    no_stock -> buy [label = "approvisionner ???"] ;
     waiting_delivery -> delivering [label = "commencer livraison"];
     delivering -> done [label = "livrer commande"] ;
     delivering -> no_one_home [label = "Signaler absence"] ;

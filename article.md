@@ -467,6 +467,8 @@ On peut résumer ces considérations par ce mantra : « **les statuts, c'est en 
 Limites
 -------
 
+TODO
+
 * logique métier dans la tête de qqn
 * logique métier sur un autre service
 * design incremental
@@ -474,4 +476,6 @@ Limites
 Conclusion
 ----------
 
-  Un statut c'est readonly et c'est le serveur qui le calcule
+TODO
+
+Un statut c'est readonly et c'est le serveur qui le calcule

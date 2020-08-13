@@ -1,55 +1,6 @@
 Les statuts, ça pue
 ===================
 
-<style>
-:root {
-  font-family: sans-serif;
-  font-size: 18px;
-}
-
-* {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-blockquote {
-  padding: 1em;
-  box-sizing: border-box;
-  border-left: 3px solid darkblue;
-  background: #eee;
-  background: linear-gradient(90deg, #eee 0%, #eee 95%, rgba(255,255,255,0) 100%);
-}
-blockquote p {
-  margin: 0;
-  padding: 0;
-}
-pre {
-  background-color: #000044;
-  color: lightgray;
-  overflow-x: auto;
-  padding: .5em;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
-
-code {
-  font-family: monospace;
-  font-size: 80%;
-}
-
-
-@media print {
-  pre {
-    border: 1px solid lightgray;
-    background: none;
-    white-space: pre-line;
-    color: gray;
-  }
-}
-
-</style>
-
 > _En tant que préparateur, je veux passer la commande en statut `en cours de préparation` afin d'informer_
 > _le client de l'avancement de sa commande_
 
@@ -62,14 +13,17 @@ C'est pourquoi nous avons souvent dans nos modélisations, nos schémas, nos _us
 nos APIs un petit champ nommé `status`, parce que l'anglais ça fait classe.
 
 Et bien je vous le dis tout de bon, ce petit champ qui stocke le statut de votre ressource, il sent mauvais
-et augure bien des périls. Bref : **Les statuts, ça pue**.
+et augure bien des périls, en particulier si vous pouvez le modifier.
+Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
+ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 
 Comme une automate
 ------------------
 
 Lorsque l'on modélise nos précessus, ils arrive fréquemment qu'on tombe sur une modélisation
 dite [d'automate fini](https://fr.wikipedia.org/wiki/Automate_fini). Ces modèles sont pratiques car faciles à visualiser
-et à décrire. Par exemple, pour mon exemple de système de livraisons de commandes.
+et à décrire. Sans s'engager complètement dans leur formalisme, elles gardent un grand pouvoir explicatif.
+Par exemple, pour mon exemple de système de livraisons de commandes.
 
 ![Flux basique de livraison](./base.png)
 
@@ -83,7 +37,7 @@ Cependant j'y vois déjà 3 défauts :
 2. On ne comprend pas **qui** doit agir lorsqu'une commande est en attente ;
 3. On n'y voit pas les cas **d'echec** et leur **stratégie de contournement** ;
 
-### Modélisons plus explicitement
+### Nommer les transitions avec le vocabulaire métier
 
 Le premier point est le plus aisé à corriger, puisqu'il suffit de nommer nos transitions
 
@@ -98,7 +52,7 @@ Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nou
 entre 2 processus en série. Ceci rendra le raisonnement plus simple. Nous avons aussi permis de faire apparaître du
 vocabulaire plus spécifique avec des commandes qui identifie le traîtement que ces états appellent.
 
-Tentons mainteannt de modéliser les cas d'echecs (seulement sur la seconde partie du processus).
+Tentons maintenant de modéliser les cas d'echecs (seulement sur la seconde partie du processus).
 
 ![Rien ne marche !](./errors.png)
 
@@ -109,9 +63,11 @@ Je me suis arrêté en route pour me concentrer sur 2 élements :
 + D'autres peuvent former des boucles lorsqu'on tente plusieurs fois la même action. Il conviendrait alors dans notre modèle
   de déterminer également ce qui permet de sortir d'une boucle ;
 
-En itérant un peu sur notre modélisation, nous avons pu :
+En se posant seulement les questions _Quelle action résulte en cet état ?_, _Qui fait cette action ?_ et _Quand fait-on cette action ?_,
+nous avons pu :
 
-+ Identifier des frontières entre des processus distincts, à propos desquels il sera plus simple de raisonner ;
++ Identifier des frontières entre des processus distincts, à propos desquels il sera plus simple de raisonner en
+  isolation et d'identifier les points de connexion ;
 + Distinguer des états qui semblaient identiques ;
 + Identifier les _verbes_ qui régissent notre processus ;
 
@@ -119,9 +75,10 @@ C'est justement sur ce dernier point que je voulais attirer votre attention.
 
 ### Implémentons les transitions et non les états
 
-Si la finalité du Système d'Informations que nous développons est de garantir la cohérence d'un processus,
+Si la finalité du Système d'Informations que nous développons est de garantir la cohérence d'un processus [<sup>1</sup>](#note-1),
 alors notre principal enjeu est d'implementer correctement **les transitions** qui régissent ce processus. À l'inverse,
-fonder notre modélisation sur les _étapes_ d'un processus risque de nous faire manquer des éléments fonctionnels cruciaux.
+fonder notre modélisation sur les _étapes_ d'un processus risque de nous faire manquer des éléments fonctionnels cruciaux
+ainsi que des stratégies de priorisation par la valeur utiles.
 
 C'est tout à fait évident dans l'exemple de _user story_ que j'ai donnée en introduction. En voici une version amendée
 pour coller à la modélisation que nous venons de faire.
@@ -129,14 +86,15 @@ pour coller à la modélisation que nous venons de faire.
 > En tant que préparateur, je veux commencer le picking d'une commande
 > afin d'aller chercher les bons produits dans le stock
 
-Ici on ne parle plus de statut, mais bien de la transition que l'on cherche à implémenter. En réalité, le statut
+Ici on ne parle plus de statut, mais bien de la **transition** que l'on cherche à implémenter. En réalité, le statut
 de la commande, tel qu'affiché à un client ou tracé dans un journal, ne concerne que peu le préparateur. Il vaudra alors
-mieux rendre ces fonctionnalités explicites pour les utilisateurs qui en ont effectivement besoin
+mieux rendre ces fonctionnalités explicites pour les utilisateurs qui en ont effectivement besoin et les réaliser en
+temps opportun.
 
 
 > En tant que client, je veux visualiser l'état de préparation de ma commande afin de me rassurer sur son avancement
 
-> En tant que contrôleur, je veux lister les préparations de commandes réalisées par un préparateur afin de valider son
+> En tant que contremaître, je veux lister les préparations de commandes réalisées par un préparateur afin de valider son
 > quota quotidien
 
 (_Ah c'est sûr, rédiger correctement ses stories peut vous conduire à réaliser que vous participez à la construction
@@ -144,14 +102,23 @@ d'un outil d'oppression_ 😳)
 
 ### En résumé
 
-La modélisation d'un processus ou du cycle de vie d'une ressource sous forme de diagramme d'automate est donc
-bien utile et pertinente. Cependant, il convient de lire cette modélisation en se focalisant sur les arcs qui lient
+La modélisation d'un processus ou du cycle de vie d'une ressource sous forme de diagramme d'automate est
+très utile et pertinente. Cependant, il convient de lire cette modélisation en se focalisant sur les arcs qui lient
 les états entre eux. En effet, quand ils interagissent avec notre système, nos utilisateurs expriment les transitions qu'ils veulent
-déclencher et non les états qu'ils veulent atteindre. L'état courant d'une ressource peut en revanche leur permettre de décider
-quelle interaction ils décident d'avoir. C'est bien le **nom des transitions** qui apparaît dans la section « je veux ... »
+déclencher et non les états qu'ils veulent atteindre[<sup>1</sup>](#note-1). L'état courant d'une ressource peut en revanche leur permettre de décider
+quelle interaction ils décident d'avoir ensuite. C'est bien le **nom des transitions** qui apparaît dans la section « _je veux …_ »
 de nos _User Stories._
 
-Mais alors, comment concevoir et découper ces _User Stories_ ?
+Ces diagrammes sont un bon support de discussion pour explorer et expliquer les règles fonctionnelles d'un logiciel. Pour
+aller plus loin, vous pouvez collaborer sur cette documentation à la façon
+des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous basez comme
+moi sur le langage [Dot](https://graphviz.org/Gallery/directed/fsm.html) pour les décrire.
+
+Dans le prochain article nous nous intéresseront aux stratégies de découpage en _User Story_ une fois que le cycle de vie
+de notre ressource est bien compris.
+
+<a name="note-1">[1]: </a> _Nous parlons bien ici des logiciels qui sont garants d'un processus métier. Dans un prochain
+article, nous verrons qu'il y a des cas légitimes qui contredisent ce qui est énoncé ici, parce que sinon, c'est pas drôle_ 🙃.
 
 Tests de recette
 ----------------
@@ -168,7 +135,7 @@ livraison des commandes :
 ### Scenarios de succès
 
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis un livreur
 QUAND je commence la livraison
@@ -177,7 +144,7 @@ ALORS la commande #1234 est en livraison
 
 plutôt simple ! continuons :
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est en absence destinataire
 ET que je suis un planificateur
 QUAND je replanifie la livraison au lendemain
@@ -193,14 +160,14 @@ Comparons maintenant à ces mêmes tests si nous avions pris le parti de constru
 des états de notre diagramme plutôt que des transitions.
 
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande #1234 à "en livraison"
 ALORS la commande #1234 a le statut "en livraison"
 ```
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 a le statut "absence de destinataire"
 ET que je suis un planificateur
 QUAND je change le statut de la commande à "prête à livrer"
@@ -218,14 +185,14 @@ Ce n'est pas tout, jetons un œil aux tests qui nous permettent de vérifier que
 
 ### Scénarios d'erreur
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande à "absence de destinataire"
 ALORS un message d'erreur m'informe qu'une commande ne peut pas passer de l'état "prête à livrer" à "absence de destinataire"
 ```
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande à "prête à livrer"
@@ -247,14 +214,14 @@ avant d'y appliquer une action en considérant que tous les autres états sont a
 appliquer ladite action. Vous pouvez alors certes rédigier autant de tests sur les messages d'erreurs
 mais la logique est alors plus aisée à comprendre à la lecture.
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis un livreur
 QUAND je signale l'absence du destinataire
 ALORS un message d'erreur m'informe "vous ne pouvez pas signaler l'absence du destinataire car la commande n'est pas en livraison"
 ```
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est en livraison
 ET que je suis un livreur
 QUAND je commence la livraison
@@ -287,7 +254,7 @@ Considérant cette _User Story_ :
 
 Je peux alors décider d'y inclure ce test de recette :
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est en livraison
 ET que je suis un livreur
 QUAND je signale l'absence du destinataire
@@ -296,14 +263,14 @@ ALORS la commande #1234 a le statut "destinataire absent"
 
 Mais aussi ceux-ci :
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est livrée
 ET que je suis livreur
 QUAND je signale l'absence du destinataire
 ALORS un message m'informe "Vous ne pouvez pas signaler l'absence d'un destinataire car la commande n'est pas en livraison (elle est livrée)"
 ```
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis livreur
 QUAND je signale l'absence du destinataire
@@ -312,7 +279,7 @@ ALORS un message m'informe "Vous ne pouvez pas signaler l'absence d'un destinata
 
 Mais je peux aussi choisir la simplicité et décrire un cas générique :
 
-```gherkin
+```
 CONSIDERANT que la commande #1234 est payée
 ET que je suis livreur
 QUAND je signale l'absence du destinataire

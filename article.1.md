@@ -1,4 +1,4 @@
-Les statuts, ça pue. Partie 1 : comme un automate
+Les statuts, ça pue. partie 1 : comme un automate
 =================================================
 
 > _En tant que préparateur, je veux passer la commande en statut `en cours de préparation` afin d'informer_

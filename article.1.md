@@ -5,7 +5,7 @@ Les statuts, ça pue. partie 1 : comme un automate
 > _le client de l'avancement de sa commande_
 
 Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. On conçoit souvent nos procédures
-métier comme une évolution linéaire, une succession d'état d'une ressource donnée qui tendent irrémédiablement
+métier comme une évolution linéaire, une succession d'états d'une ressource donnée qui tendent irrémédiablement
 vers un statut `terminé`. _Tirer à droite !_ ou _Zero stock !_ sont autant de _gimmicks_ qui révèlent notre
 inlassable vision finaliste d'un processus de production en flux.
 
@@ -14,54 +14,54 @@ nos APIs un petit champ nommé `status`, parce que l'anglais ça fait classe.
 
 Et bien je vous le dis tout de bon, ce petit champ qui stocke le statut de votre ressource, il sent mauvais
 et augure bien des périls, en particulier si vous pouvez le modifier.
-Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
+Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérence
 ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 
-Comme une automate
+Comme un automate
 ------------------
 
-Lorsque l'on modélise nos précessus, ils arrive fréquemment qu'on tombe sur une modélisation
+Lorsque l'on modélise nos processus, il arrive fréquemment qu'on tombe sur une modélisation
 dite [d'automate fini](https://fr.wikipedia.org/wiki/Automate_fini). Ces modèles sont pratiques car faciles à visualiser
-et à décrire. Sans s'engager complètement dans leur formalisme, elles gardent un grand pouvoir explicatif.
-Par exemple, pour mon exemple de système de livraisons de commandes.
+et à décrire. Sans s'engager complètement dans leur formalisme, ils gardent un grand pouvoir explicatif.
+Par exemple, pour mon exemple de système de livraisons de commandes :
 
 ![Flux basique de livraison](./base.png)
 
 Ce diagramme indique le cycle de vie d'une commande dans un service de logistique une fois qu'elle est passée par un client.
 On y voit les temps d'attente entre les équipes qui préparent les commandes et celles qui les livrent. On y voit également
-quel état précede quel état, et donc quelles transitions sont légitimes.
+quel état précède quel état, et donc quelles transitions sont légitimes.
 
 Cependant j'y vois déjà 3 défauts :
 
-1. On ne comprends pas les **actions** à faire pour faire passer d'un statut à l'autre ;
+1. On ne comprend pas les **actions** à faire pour faire passer d'un statut à l'autre ;
 2. On ne comprend pas **qui** doit agir lorsqu'une commande est en attente ;
-3. On n'y voit pas les cas **d'echec** et leur **stratégie de contournement** ;
+3. On n'y voit pas les cas **d'échec** et leur **stratégie de contournement** ;
 
 ### Nommer les transitions avec le vocabulaire métier
 
-Le premier point est le plus aisé à corriger, puisqu'il suffit de nommer nos transitions
+Le premier point est le plus aisé à corriger, puisqu'il suffit de nommer nos transitions :
 
 ![transitions nommées](./named.png)
 
 Voilà qui est un peu plus clair. Ce qui me gène encore, c'est que le statut `en_attente` traduit l'attente d'acteurs
-variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélons ceci pour l'instant afin d'y voir plus clair
+variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélons ceci pour l'instant afin d'y voir plus clair :
 
 ![Qu'est-ce qu'on attend ?](./waiting.png)
 
 Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nous a permis d'identifier un travail distinct
 entre 2 processus en série. Ceci rendra le raisonnement plus simple. Nous avons aussi permis de faire apparaître du
-vocabulaire plus spécifique avec des commandes qui identifie le traîtement que ces états appellent.
+vocabulaire plus spécifique avec des commandes qui identifient le traitement que ces états appellent.
 
-Tentons maintenant de modéliser les cas d'echecs (seulement sur la seconde partie du processus).
+Tentons maintenant de modéliser les cas d'échecs (seulement sur la seconde partie du processus).
 
 ![Rien ne marche !](./errors.png)
 
-Prévoir les cas d'erreurs possibles et la reprise sur echec d'un processus est souvent long et difficile…
+Prévoir les cas d'erreurs possibles et la reprise sur échec d'un processus est souvent long et difficile…
 Je me suis arrêté en route pour me concentrer sur 2 élements :
 
 + Certains cas font intervenir des domaines complètement différents (ex. réapprovisionner des produits lorsque le stock est vide) ;
 + D'autres peuvent former des boucles lorsqu'on tente plusieurs fois la même action. Il conviendrait alors dans notre modèle
-  de déterminer également ce qui permet de sortir d'une boucle ;
+  de déterminer également ce qui permet de sortir d'une boucle.
 
 En se posant seulement les questions _Quelle action résulte en cet état ?_, _Qui fait cette action ?_ et _Quand fait-on cette action ?_,
 nous avons pu :
@@ -76,11 +76,11 @@ C'est justement sur ce dernier point que je voulais attirer votre attention.
 ### Implémentons les transitions et non les états
 
 Si la finalité du Système d'Informations que nous développons est de garantir la cohérence d'un processus [<sup>1</sup>](#note-1),
-alors notre principal enjeu est d'implementer correctement **les transitions** qui régissent ce processus. À l'inverse,
+alors notre principal enjeu est d'implémenter correctement **les transitions** qui régissent ce processus. À l'inverse,
 fonder notre modélisation sur les _étapes_ d'un processus risque de nous faire manquer des éléments fonctionnels cruciaux
 ainsi que des stratégies de priorisation par la valeur utiles.
 
-C'est tout à fait évident dans l'exemple de _user story_ que j'ai donnée en introduction. En voici une version amendée
+C'est tout à fait évident dans l'exemple de _user story_ que j'ai donné en introduction. En voici une version amendée
 pour coller à la modélisation que nous venons de faire.
 
 > En tant que préparateur, je veux commencer le picking d'une commande
@@ -111,10 +111,10 @@ de nos _User Stories._
 
 Ces diagrammes sont un bon support de discussion pour explorer et expliquer les règles fonctionnelles d'un logiciel. Pour
 aller plus loin, vous pouvez collaborer sur cette documentation à la façon
-des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous basez comme
+des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous vous basez comme
 moi sur le langage [Dot](https://graphviz.org/Gallery/directed/fsm.html) pour les décrire.
 
-Dans le prochain article nous nous intéresseront aux stratégies de découpage en _User Story_ une fois que le cycle de vie
+Dans le prochain article nous nous intéresserons aux stratégies de découpage en _User Story_ une fois que le cycle de vie
 de notre ressource est bien compris.
 
 <a name="note-1">[1]: </a> _Nous parlons bien ici des logiciels qui sont garants d'un processus métier. Dans un prochain

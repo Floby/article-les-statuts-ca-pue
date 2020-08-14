@@ -5,7 +5,7 @@ Les statuts, ça pue
 > _le client de l'avancement de sa commande_
 
 Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. On conçoit souvent nos procédures
-métier comme une évolution linéaire, une succession d'état d'une ressource donnée qui tendent irrémédiablement
+métier comme une évolution linéaire, une succession d'états d'une ressource donnée qui tendent irrémédiablement
 vers un statut `terminé`. _Tirer à droite !_ ou _Zero stock !_ sont autant de _gimmicks_ qui révèlent notre
 inlassable vision finaliste d'un processus de production en flux.
 
@@ -14,7 +14,7 @@ nos APIs un petit champ nommé `status`, parce que l'anglais ça fait classe.
 
 Et bien je vous le dis tout de bon, ce petit champ qui stocke le statut de votre ressource, il sent mauvais
 et augure bien des périls, en particulier si vous pouvez le modifier.
-Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
+Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérence
 ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 
 + [Partie 1 : Comme un automate](./1.html)

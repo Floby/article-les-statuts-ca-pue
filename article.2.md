@@ -185,17 +185,29 @@ ALORS un message m'informe "Vous ne pouvez pas faire cette action en tant que pr
 ```
 
 Bref, en piochant quelques tests de recette, nous pouvons concevoir une _User Story_ cohérente de taille raisonnable.
-Rappelons-nous seulement que la plus petite des _User Stories_ ne comporte peut-être qu'un seul test de recette !
+Rappelons-nous seulement que beaucoup de petites _User Stories_ sont préférables à peu de grosses car elle permettent
+un _feedback_ bien plus rapide et donc plus d'occasions de s'adapter à temps.
 
 ### En résumé
 
 Je trouve qu'il est plus aisé de concevoir ses critères d'acceptance lorsqu'on part du principe
 que **personne ne modifie directement le statut** d'une ressource. Les utilisateurs du système lancent les **intéractions** qu'ils
-ont avec lui (les _cas d'usages_ ou même les _commandes_). Ces interactions ont une influence sur le statut d'une ressource que l'on
-peut alors déduire. Décrire qu'une ressource est dans un certain état revient alors à lister les transitions qui
-lui ont permis de l'atteindre. Consulter l'état d'une ressource nous permet alors de savoir si une action donnée
-peut y être appliquée ou non. Il relève donc de l'aide à la décision et de la cohérence de l'action demandée.
+ont avec lui (les _cas d'usages_ ou même les _commandes_). C'est le nom des transitions qui se retrouve dans la section
+`QUAND` (`WHEN`) de nos tests Gherkin.
+
+Ces interactions ont une influence sur le statut d'une ressource que l'on
+peut alors vérifier. Décrire qu'une ressource est dans un certain état revient alors à lister les transitions qui
+lui ont permis de l'atteindre.
+
+Consulter l'état d'une ressource nous permet alors de savoir si une commande donnée
+peut y être appliquée ou non. Cette consultation relève donc de l'aide à la décision, c'est la lecture du statut
+qui permet à l'utilisateur de lancer la bonne[<sup>1</sup>](#note-1) intéraction.
+
 Ces tests de recette peuvent constituer la base du découpage de nos _User Stories_.
 
 Du coup, quand peut-on parler de statuts dans nos _User Stories_ ?
+Dans le prochain article, nous verrons quelle est la place des _statuts_ dans notre langage omniprésent (_Ubiquitous Language_)
 
+
+<a name="note-1">[1]: </a> _La **bonne** intéraction est celle qui sera acceptée par le système ET qui a le meilleur
+sens métier._

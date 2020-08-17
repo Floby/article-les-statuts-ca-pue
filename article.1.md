@@ -21,8 +21,7 @@ ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 Comme un automate
 ------------------
 
-
-Lorsque l'on modélise nos précessus, il arrive fréquemment qu'on tombe sur une modélisation
+Lorsque l'on modélise nos processus, il arrive fréquemment qu'on tombe sur une modélisation
 dite [d'automate fini](https://fr.wikipedia.org/wiki/Automate_fini). Ces modèles sont pratiques car faciles à visualiser
 et à décrire. Sans s'engager complètement dans leur formalisme, ils gardent un grand pouvoir explicatif.
 Par exemple, pour mon exemple de système de livraisons de commandes.
@@ -46,26 +45,26 @@ Le premier point est le plus aisé à corriger, puisqu'il suffit de nommer nos t
 ![transitions nommées](./named.png)
 
 Voilà qui est un peu plus clair. Ce qui me gène encore, c'est que le statut `en_attente` traduit l'attente d'acteurs
-variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélons ceci pour l'instant afin d'y voir plus clair :
+variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démêlons ceci pour l'instant afin d'y voir plus clair :
 
 ![Qu'est-ce qu'on attend ?](./waiting.png)
 
 Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nous a permis d'identifier un travail distinct
 entre 2 processus en série. Ceci rendra le raisonnement plus simple. En sus, du
-vocabulaire plus spécifique est apparu avec des commandes qui identifient le traîtement que ces états appellent.
+vocabulaire plus spécifique est apparu avec des commandes qui identifient le traitement que ces états appellent.
 
 Tentons maintenant de modéliser les cas d'échecs (seulement sur la seconde partie du processus).
 
 ![Rien ne marche !](./errors.png)
 
 Prévoir les cas d'erreurs possibles et la reprise sur échec d'un processus est souvent long et difficile…
-Je me suis arrêté en route pour me concentrer sur 2 élements :
+Je me suis arrêté en route pour me concentrer sur 2 éléments :
 
 + Certains cas font intervenir des domaines complètement différents (ex. réapprovisionner des produits lorsque le stock est vide) ;
 + D'autres peuvent former des boucles lorsqu'on tente plusieurs fois la même action. Il conviendrait alors dans notre modèle
   de déterminer également ce qui permet de sortir d'une boucle.
 
-En se posant seulement les questions _Quelle action résulte en cet état ?_, _Qui fait cette action ?_ et _Quand fait-on cette action ?_,
+En se posant seulement les questions _Quelle action résulte en cet état ?_, _Qui fait cette action ?_ et _Quand fait on cette action ?_,
 nous avons pu :
 
 + Identifier des frontières entre des processus distincts, à propos desquels il sera plus simple de raisonner en
@@ -113,7 +112,7 @@ de nos _User Stories._
 
 Ces diagrammes sont un bon support de discussion pour explorer et expliquer les règles fonctionnelles d'un logiciel. Pour
 aller plus loin, vous pouvez collaborer sur cette documentation à la façon
-des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous vous basez comme
+des [ADR évoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous vous basez comme
 moi sur le langage [Dot](https://graphviz.org/Gallery/directed/fsm.html) pour les décrire.
 
 Dans le prochain article nous nous intéresserons aux stratégies de découpage en _User Story_ une fois que le cycle de vie

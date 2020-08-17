@@ -20,9 +20,9 @@ ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 Comme une automate
 ------------------
 
-Lorsque l'on modélise nos précessus, ils arrive fréquemment qu'on tombe sur une modélisation
+Lorsque l'on modélise nos précessus, il arrive fréqumment qu'on tombe sur une modélisation
 dite [d'automate fini](https://fr.wikipedia.org/wiki/Automate_fini). Ces modèles sont pratiques car faciles à visualiser
-et à décrire. Sans s'engager complètement dans leur formalisme, elles gardent un grand pouvoir explicatif.
+et à décrire. Sans s'engager complètement dans leur formalisme, ils gardent un grand pouvoir explicatif.
 Par exemple, pour mon exemple de système de livraisons de commandes.
 
 ![Flux basique de livraison](./base.png)
@@ -50,7 +50,7 @@ variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélo
 
 Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nous a permis d'identifier un travail distinct
 entre 2 processus en série. Ceci rendra le raisonnement plus simple. Nous avons aussi permis de faire apparaître du
-vocabulaire plus spécifique avec des commandes qui identifie le traîtement que ces états appellent.
+vocabulaire plus spécifique avec des commandes qui identifient le traîtement que ces états appellent.
 
 Tentons maintenant de modéliser les cas d'echecs (seulement sur la seconde partie du processus).
 
@@ -80,7 +80,7 @@ alors notre principal enjeu est d'implementer correctement **les transitions** q
 fonder notre modélisation sur les _étapes_ d'un processus risque de nous faire manquer des éléments fonctionnels cruciaux
 ainsi que des stratégies de priorisation par la valeur utiles.
 
-C'est tout à fait évident dans l'exemple de _user story_ que j'ai donnée en introduction. En voici une version amendée
+C'est tout à fait évident dans l'exemple de _user story_ que j'ai donné en introduction. En voici une version amendée
 pour coller à la modélisation que nous venons de faire.
 
 > En tant que préparateur, je veux commencer le picking d'une commande

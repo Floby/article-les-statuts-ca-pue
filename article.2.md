@@ -15,13 +15,13 @@ Tests de recette
 En tant que _Product Owners_ consciencieux, nous allons réfléchir à la manière de découper ce modèle en _User Stories_
 avec leur lot de tests d'acceptance. Pour le bien de tous, _Product Owners_, Développeurs et Testeurs, il convient
 de rédiger ces tests de manière à ce qu'il soient systématisables, voire même automatisables. J'aime raisonner en
-[Gherkin](https://cucumber.io/docs/gherkin/), qui nous permet de bien distinguer notre état inital de test, les actions
+[Gherkin](https://cucumber.io/docs/gherkin/), qui nous permet de bien distinguer notre état initial de test, les actions
 que nous testons et les prédictions que nous faisons sur leurs conséquences. Tentons quelques tests relatifs à la
 livraison des commandes :
 
 ![Livraison des commandes](./delivery.png)
 
-### Scenarios de succès
+### Scénarios de succès
 
 
 ```
@@ -31,7 +31,7 @@ QUAND je commence la livraison
 ALORS la commande #1234 est en livraison
 ```
 
-plutôt simple ! continuons :
+Plutôt simple ! Continuons :
 
 ```
 CONSIDERANT que la commande #1234 est en absence destinataire
@@ -88,7 +88,7 @@ QUAND je change le statut de la commande à "prête à livrer"
 ALORS un message d'erreur m'informe que la commande a déjà le statut "prête à livrer"
 ```
 
-Nous nageons désormais en plein détail d'implementation pour des tests qui devraient pourtant décrire d'un point de vue
+Nous nageons désormais en plein détail d'implémentation pour des tests qui devraient pourtant décrire d'un point de vue
 fonctionnel le métier du système. En effet, en approchant le problème par la modification du statut de ma ressource
 je suis à terme obligé de définir l'exhaustivité de tests d'acceptance pour les transitions légitimes comme celles
 illégitimes, en rouge dans cette illustration.
@@ -100,7 +100,7 @@ qui n'a aucun sens dans notre système.
 
 En approchant par les transitions, il suffit de décrire l'état dans lequel doit se trouver la ressource
 avant d'y appliquer une action en considérant que tous les autres états sont alors illégitimes pour y
-appliquer ladite action. Vous pouvez alors certes rédigier autant de tests sur les messages d'erreurs
+appliquer ladite action. Vous pouvez alors certes rédiger autant de tests sur les messages d'erreurs
 mais la logique est alors plus aisée à comprendre à la lecture.
 
 ```
@@ -119,8 +119,8 @@ ALORS un message d'erreur m'informe "vous ne pouvez pas commencer la livraison c
 
 ### Découpons selon les pointillés 
 
-Nous nous trouvons desormais avec une collection plus ou moins exhaustive de cas de tests. Ces tests ont l'immense
-valeur de rendre explicite beaucoup de choses qui auraient pu autrement sembler evidentes pour les _Product Owners,_
+Nous nous trouvons désormais avec une collection plus ou moins exhaustive de cas de tests. Ces tests ont l'immense
+valeur de rendre explicite beaucoup de choses qui auraient pu autrement sembler évidentes pour les _Product Owners,_
 comme pour les Testeurs et les Développeurs. Le problème est que l'évidence est souvent très différente pour chacun !
 
 Rendre le maximum de choses explicites peut nous aider à trouver la bonne taille pour découper nos _User Stories._ Ces
@@ -185,13 +185,13 @@ ALORS un message m'informe "Vous ne pouvez pas faire cette action en tant que pr
 ```
 
 Bref, en piochant quelques tests de recette, nous pouvons concevoir une _User Story_ cohérente de taille raisonnable.
-Rappelons-nous seulement que beaucoup de petites _User Stories_ sont préférables à peu de grosses car elle permettent
+Rappelons nous seulement que beaucoup de petites _User Stories_ sont préférables à peu de grosses car elle permettent
 un _feedback_ bien plus rapide et donc plus d'occasions de s'adapter à temps.
 
 ### En résumé
 
 Je trouve qu'il est plus aisé de concevoir ses critères d'acceptance lorsqu'on part du principe
-que **personne ne modifie directement le statut** d'une ressource. Les utilisateurs du système lancent les **intéractions** qu'ils
+que **personne ne modifie directement le statut** d'une ressource. Les utilisateurs du système lancent les **interactions** qu'ils
 ont avec lui (les _cas d'usages_ ou même les _commandes_). C'est le nom des transitions qui se retrouve dans la section
 `QUAND` (`WHEN`) de nos tests Gherkin.
 
@@ -201,13 +201,13 @@ lui ont permis de l'atteindre.
 
 Consulter l'état d'une ressource nous permet alors de savoir si une commande donnée
 peut y être appliquée ou non. Cette consultation relève donc de l'aide à la décision, c'est la lecture du statut
-qui permet à l'utilisateur de lancer la bonne[<sup>1</sup>](#note-1) intéraction.
+qui permet à l'utilisateur de lancer la bonne[<sup>1</sup>](#note-1) interaction.
 
 Ces tests de recette peuvent constituer la base du découpage de nos _User Stories_.
 
-Du coup, quand peut-on parler de statuts dans nos _User Stories_ ?
+Du coup, quand peut on parler de statuts dans nos _User Stories_ ?
 Dans le prochain article, nous verrons quelle est la place des _statuts_ dans notre langage omniprésent (_Ubiquitous Language_)
 
 
-<a name="note-1">[1]: </a> _La **bonne** intéraction est celle qui sera acceptée par le système ET qui a le meilleur
+<a name="note-1">[1]: </a> _La **bonne** interaction est celle qui sera acceptée par le système ET qui a le meilleur
 sens métier._

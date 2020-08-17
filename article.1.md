@@ -4,7 +4,8 @@ Les statuts, ça pue. partie 1 : comme un automate
 > _En tant que préparateur, je veux passer la commande en statut `en cours de préparation` afin d'informer_
 > _le client de l'avancement de sa commande_
 
-Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. On conçoit souvent nos procédures
+
+Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. Nous nous imaginons souvent nos procédures
 métier comme une évolution linéaire, une succession d'états d'une ressource donnée qui tendent irrémédiablement
 vers un statut `terminé`. _Tirer à droite !_ ou _Zero stock !_ sont autant de _gimmicks_ qui révèlent notre
 inlassable vision finaliste d'un processus de production en flux.
@@ -20,10 +21,11 @@ ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 Comme un automate
 ------------------
 
-Lorsque l'on modélise nos processus, il arrive fréquemment qu'on tombe sur une modélisation
+
+Lorsque l'on modélise nos précessus, il arrive fréquemment qu'on tombe sur une modélisation
 dite [d'automate fini](https://fr.wikipedia.org/wiki/Automate_fini). Ces modèles sont pratiques car faciles à visualiser
 et à décrire. Sans s'engager complètement dans leur formalisme, ils gardent un grand pouvoir explicatif.
-Par exemple, pour mon exemple de système de livraisons de commandes :
+Par exemple, pour mon exemple de système de livraisons de commandes.
 
 ![Flux basique de livraison](./base.png)
 
@@ -49,8 +51,8 @@ variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélo
 ![Qu'est-ce qu'on attend ?](./waiting.png)
 
 Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nous a permis d'identifier un travail distinct
-entre 2 processus en série. Ceci rendra le raisonnement plus simple. Nous avons aussi permis de faire apparaître du
-vocabulaire plus spécifique avec des commandes qui identifient le traitement que ces états appellent.
+entre 2 processus en série. Ceci rendra le raisonnement plus simple. En sus, du
+vocabulaire plus spécifique est apparu avec des commandes qui identifient le traîtement que ces états appellent.
 
 Tentons maintenant de modéliser les cas d'échecs (seulement sur la seconde partie du processus).
 

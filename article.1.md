@@ -4,7 +4,7 @@ Les statuts, ça pue. partie 1 : comme un automate
 > _En tant que préparateur, je veux passer la commande en statut `en cours de préparation` afin d'informer_
 > _le client de l'avancement de sa commande_
 
-Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. On conçoit souvent nos procédures
+Vous avez déjà vu cette _User Story_. Si ce n'est elle, c'est donc sa sœur. Nous nous imaginons souvent nos procédures
 métier comme une évolution linéaire, une succession d'état d'une ressource donnée qui tendent irrémédiablement
 vers un statut `terminé`. _Tirer à droite !_ ou _Zero stock !_ sont autant de _gimmicks_ qui révèlent notre
 inlassable vision finaliste d'un processus de production en flux.
@@ -49,8 +49,8 @@ variés qui, selon mon métier, agissent tour à tour ou en parallèle. Démélo
 ![Qu'est-ce qu'on attend ?](./waiting.png)
 
 Génial ! Rendre explicite quelles personnes peuvent résoudre une _attente_ nous a permis d'identifier un travail distinct
-entre 2 processus en série. Ceci rendra le raisonnement plus simple. Nous avons aussi permis de faire apparaître du
-vocabulaire plus spécifique avec des commandes qui identifient le traîtement que ces états appellent.
+entre 2 processus en série. Ceci rendra le raisonnement plus simple. En sus, du
+vocabulaire plus spécifique est apparu avec des commandes qui identifient le traîtement que ces états appellent.
 
 Tentons maintenant de modéliser les cas d'echecs (seulement sur la seconde partie du processus).
 
@@ -111,7 +111,7 @@ de nos _User Stories._
 
 Ces diagrammes sont un bon support de discussion pour explorer et expliquer les règles fonctionnelles d'un logiciel. Pour
 aller plus loin, vous pouvez collaborer sur cette documentation à la façon
-des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous basez comme
+des [ADR evoqués dans cet article](https://blog.octo.com/larchitecte-et-git-une-fusion-de-raison/) si vous vous basez comme
 moi sur le langage [Dot](https://graphviz.org/Gallery/directed/fsm.html) pour les décrire.
 
 Dans le prochain article nous nous intéresseront aux stratégies de découpage en _User Story_ une fois que le cycle de vie

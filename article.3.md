@@ -23,7 +23,7 @@ dans notre conception ?
 
 Pour nos applications classiques, on cherche à faciliter les interactions entre nos utilisateurs et notre application.
 Nos utilisateurs doivent décider quelles interactions lancer : Publier un article, Préparer une commande, Enregistrer
-un brouillon, _etc_. C'est cette decision qui nécessite le concept de statut, en particulier lorsqu'il s'agit d'un système
+un brouillon, _etc_. C'est cette décision qui nécessite le concept de statut, en particulier lorsqu'il s'agit d'un système
 qui coordonne plusieurs personnes ou plusieurs équipes. Les utilisateurs ne s'intéressent alors qu'à un sous-ensemble
 des ressources qui portent le statut qui les intéresse.
 
@@ -59,7 +59,7 @@ Nous aurons alors des _User Stories_ qui ressemblent à celles-ci :
 
 > _En tant que Bob, je veux lister les commandes qui ont le statut `délai_échu` ou `montant_insuffisant` afin de relancer les débiteurs_
 
-> _En tant que David, je veux lister les commandes qui ont le statut `excedent_paiement` afin de régulariser_
+> _En tant que David, je veux lister les commandes qui ont le statut `excédent_paiement` afin de régulariser_
 
 C'est bien ces fonctionnalités de consultation qui permettent à nos utilisateurs de lancer les bonnes actions ensuite, sans erreurs.
 Les bonnes actions sont celles qu'il **faut** faire, qu'ils **peuvent** faire et qui seront **valides**.

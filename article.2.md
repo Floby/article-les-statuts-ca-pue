@@ -24,7 +24,7 @@ livraison des commandes :
 ### Scénarios de succès
 
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis un livreur
 QUAND je commence la livraison
@@ -33,7 +33,7 @@ ALORS la commande #1234 est en livraison
 
 Plutôt simple ! Continuons :
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est en absence destinataire
 ET que je suis un planificateur
 QUAND je replanifie la livraison au lendemain
@@ -49,14 +49,14 @@ Comparons maintenant à ces mêmes tests si nous avions pris le parti de constru
 des états de notre diagramme plutôt que des transitions.
 
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande #1234 à "en livraison"
 ALORS la commande #1234 a le statut "en livraison"
 ```
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 a le statut "absence de destinataire"
 ET que je suis un planificateur
 QUAND je change le statut de la commande à "prête à livrer"
@@ -74,14 +74,14 @@ Ce n'est pas tout, jetons un œil aux tests qui nous permettent de vérifier que
 
 ### Scénarios d'erreur
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande à "absence de destinataire"
 ALORS un message d'erreur m'informe qu'une commande ne peut pas passer de l'état "prête à livrer" à "absence de destinataire"
 ```
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 a le statut "prête à livrer"
 ET que je suis un livreur
 QUAND je change le statut de la commande à "prête à livrer"
@@ -103,14 +103,14 @@ avant d'y appliquer une action en considérant que tous les autres états sont a
 appliquer ladite action. Vous pouvez alors certes rédiger autant de tests sur les messages d'erreurs
 mais la logique est alors plus aisée à comprendre à la lecture.
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis un livreur
 QUAND je signale l'absence du destinataire
 ALORS un message d'erreur m'informe "vous ne pouvez pas signaler l'absence du destinataire car la commande n'est pas en livraison"
 ```
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est en livraison
 ET que je suis un livreur
 QUAND je commence la livraison
@@ -143,7 +143,7 @@ Considérant cette _User Story_ :
 
 Je peux alors décider d'y inclure ce test de recette :
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est en livraison
 ET que je suis un livreur
 QUAND je signale l'absence du destinataire
@@ -152,14 +152,14 @@ ALORS la commande #1234 a le statut "destinataire absent"
 
 Mais aussi ceux-ci :
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est livrée
 ET que je suis livreur
 QUAND je signale l'absence du destinataire
 ALORS un message m'informe "Vous ne pouvez pas signaler l'absence d'un destinataire car la commande n'est pas en livraison (elle est livrée)"
 ```
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est prête à livrer
 ET que je suis livreur
 QUAND je signale l'absence du destinataire
@@ -168,7 +168,7 @@ ALORS un message m'informe "Vous ne pouvez pas signaler l'absence d'un destinata
 
 Mais je peux aussi choisir la simplicité et décrire un cas générique :
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est payée
 ET que je suis livreur
 QUAND je signale l'absence du destinataire
@@ -177,7 +177,7 @@ ALORS un message m'informe "Vous ne pouvez pas signaler l'absence d'un destinata
 
 Ou si on veut prioriser les droits d'accès :
 
-```
+```plaintext
 CONSIDERANT que la commande #1234 est en livraison
 ET que je suis préparateur
 QUAND je signale l'absence du destinataire

@@ -193,7 +193,7 @@ un _feedback_ bien plus rapide et donc plus d'occasions de s'adapter à temps.
 Je trouve qu'il est plus aisé de concevoir ses critères d'acceptance lorsqu'on part du principe
 que **personne ne modifie directement le statut** d'une ressource. Les utilisateurs du système lancent les **interactions** qu'ils
 ont avec lui (les _cas d'usages_ ou même les _commandes_). C'est le nom des transitions qui se retrouve dans la section
-`QUAND` (`WHEN`) de nos tests Gherkin. Quant aux sections `THEN` (`ALORS`), elles sont les indicateurs de la plus
+`QUAND` (`WHEN`) de nos tests Gherkin. Quant aux sections `ALORS` (`THEN`), elles sont les indicateurs de la plus
 petite unité de découpage possible de votre fonctionnalité.
 
 Ces interactions ont une influence sur le statut d'une ressource que l'on

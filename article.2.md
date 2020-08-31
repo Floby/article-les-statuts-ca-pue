@@ -7,7 +7,11 @@ nos APIs un petit champ nommé `status`, parce que l'anglais ça fait classe.
 Et bien je vous le dis tout de bon, ce petit champ qui stocke le statut de votre ressource, il sent mauvais
 et augure bien des périls, en particulier si vous pouvez le modifier.
 Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
-ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
+ou de résilience de la conception technique. Bref : [**Les statuts, ça pue**](https://blog.octo.com/les-statuts-ca-pue-part-1-fini-comme-un-automate/).
+
+Previously
+----------------
+Nous avons vu dans l'article précédent comment modéliser des changement d'état au sein d'un système à l'aide de diagramme d'automate en se concentrant sur les transitions entre les états exprimées par les utilisateurs.
 
 Tests de recette
 ----------------
@@ -128,11 +132,11 @@ tests peuvent nous aider à mieux saisir la complexité ou la taille d'une fonct
 
 Certaines équipes estiment la complexité des _User Stories_ par leur nombre de tests de recette. Les tâches les plus
 simples ne comprennent qu'un seul test. Afin de concevoir des _user stories_ de taille raisonnable, vous pouvez alors construire
-avec votre équipe, le découpage de celles-ci en cherchant à minimiser le nombre de tests de recette par _User Story_.
+avec votre équipe le découpage de celles-ci en cherchant à minimiser le nombre de tests de recette par _User Story_.
 Vous pouvez par exemple vous adonner à un atelier [_Tres Amigos_](https://blog.octo.com/le-bdd/).
 
 Baser ses estimations sur le nombre de cas de tests d'acceptance possède également l'avantage d'être plus objectif
-et moins sujet [au biais d'optimisme](https://fr.wikipedia.org/wiki/Biais_d%27optimisme). Ils permettent aussi de
+et moins sujet [au biais d'optimisme](https://fr.wikipedia.org/wiki/Biais_d%27optimisme). Cela permet aussi de
 délimiter clairement les bornes d'une fonctionnalité afin que tous les acteurs de son développement puissent s'accorder
 à dire quand elle est terminée.
 

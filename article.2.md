@@ -9,8 +9,9 @@ et augure bien des périls, en particulier si vous pouvez le modifier.
 Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
 ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 
-Dans l'article précédent, nous nous sommes penchés sur la modélisation de processus métier par des machines à états (
-ou _automates_). Nous en concluions qu'il convenait de baser la rédactions des _User Stories_ sur les *transitions*
+Dans [l'article précédent](https://blog.octo.com/les-statuts-ca-pue-part-1-fini-comme-un-automate/),
+nous nous sommes penchés sur la modélisation de processus métier par des machines à états (ou _automates_).
+Nous tirions la conclusion qu'il convenait de baser la rédactions des _User Stories_ sur les *transitions*
 plutôt que sur les états afin de faire ressortir les *verbes* de notre domaine métier. C'est ces verbes qui traduisent
 le mieux les cas d'usages, c'est-à-dire les intentions des nos utilisateurs. Cette fois ci, nous nous intéressons
 à la rédaction des critères d'acceptances de ces US, qui peuvent également nous aider à trouver le bon découpage.

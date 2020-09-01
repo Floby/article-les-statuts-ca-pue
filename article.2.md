@@ -9,12 +9,18 @@ et augure bien des périls, en particulier si vous pouvez le modifier.
 Il peut être révélateur d'une perte de richesse fonctionnelle de notre solution ainsi que de défauts de cohérences
 ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 
+Dans l'article précédent, nous nous sommes penchés sur la modélisation de processus métier par des machines à états (
+ou _automates_). Nous en concluions qu'il convenait de baser la rédactions des _User Stories_ sur les *transitions*
+plutôt que sur les états afin de faire ressortir les *verbes* de notre domaine métier. C'est ces verbes qui traduisent
+le mieux les cas d'usages, c'est-à-dire les intentions des nos utilisateurs. Cette fois ci, nous nous intéressons
+à la rédaction des critères d'acceptances de ces US, qui peuvent également nous aider à trouver le bon découpage.
+
 Tests de recette
 ----------------
 
 En tant que _Product Owners_ consciencieux, nous allons réfléchir à la manière de découper ce modèle en _User Stories_
 avec leur lot de tests d'acceptance. Pour le bien de tous, _Product Owners_, Développeurs et Testeurs, il convient
-de rédiger ces tests de manière à ce qu'il soient systématisables, voire même automatisables. J'aime raisonner en
+de rédiger ces tests de manière à ce qu'il soient systématisables, voire automatisables. J'aime raisonner en
 [Gherkin](https://cucumber.io/docs/gherkin/), qui nous permet de bien distinguer notre état initial de test, les actions
 que nous testons et les prédictions que nous faisons sur leurs conséquences. Tentons quelques tests relatifs à la
 livraison des commandes :
@@ -41,12 +47,12 @@ ALORS la commande #1234 est prête à être livrée
 ```
 
 Celui-ci ignore beaucoup de détails de la vie réelle, mais je simplifie pour garder les exemples courts.
-Ici, on peut aussi remarquer que dans la description de mon état initial, je dit simplement qu'une commande
+Ici, on peut aussi remarquer que dans la description de mon état initial, je dis simplement qu'une commande
 est dans un état précis. La connaissance des étapes nécessaires pour parvenir à cet état doit être
 partagée entre _product owner_, développeurs et testeurs.
 
-Comparons maintenant à ces mêmes tests si nous avions pris le parti de construire notre fonctionnalité à partir
-des états de notre diagramme plutôt que des transitions.
+Comparons maintenant à une rédaction alternative de ces tests qui s'appuie d'abord sur les états de notre diagramme
+plutôt que sur les transitions.
 
 
 ```plaintext

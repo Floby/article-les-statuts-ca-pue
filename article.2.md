@@ -199,9 +199,10 @@ un _feedback_ bien plus rapide et donc plus d'occasions de s'adapter à temps.
 
 Je trouve qu'il est plus aisé de concevoir ses critères d'acceptance lorsqu'on part du principe
 que **personne ne modifie directement le statut** d'une ressource. Les utilisateurs du système lancent les **interactions** qu'ils
-ont avec lui (les _cas d'usages_ ou même les _commandes_). C'est le nom des transitions qui se retrouve dans la section
+ont avec lui (les _cas d'usages_ ou même les _commandes_). C'est les **verbes** du métier (le nom des transitions) qui se retrouve dans la section
 `QUAND` (`WHEN`) de nos tests Gherkin. Quant aux sections `ALORS` (`THEN`), elles sont les indicateurs de la plus
-petite unité de découpage possible de votre fonctionnalité.
+petite unité de découpage possible de votre fonctionnalité, elles modélisent une attente de l'utilisateur de manière
+atomique.
 
 Ces interactions ont une influence sur le statut d'une ressource que l'on
 peut alors vérifier. Décrire qu'une ressource est dans un certain état revient alors à lister les transitions qui
@@ -214,7 +215,8 @@ qui permet à l'utilisateur de lancer la bonne[<sup>1</sup>](#note-1) interactio
 Ces tests de recette peuvent constituer la base du découpage de nos _User Stories_.
 
 Du coup, quand peut on parler de statuts dans nos _User Stories_ ?
-Dans le prochain article, nous verrons quelle est la place des _statuts_ dans notre langage omniprésent (_Ubiquitous Language_)
+Dans le prochain article, nous verrons quelle est la place des _statuts_ dans notre langage omniprésent
+([_Ubiquitous Language_](https://en.wikipedia.org/wiki/Domain-driven_design))
 
 
 <a name="note-1">[1]: </a> _La **bonne** interaction est celle qui sera acceptée par le système ET qui a le meilleur

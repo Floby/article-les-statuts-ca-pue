@@ -9,7 +9,9 @@ static: dist/assets
 
 ARTICLE_SRC := $(wildcard article.*.md)
 ARTICLE_DIST := $(patsubst article.%.md,dist/%.html,$(ARTICLE_SRC))
-html: $(ARTICLE_DIST)
+html: $(ARTICLE_DIST) dist/index.html
+
+dist/index.html: dist/0.html
 	cp dist/0.html dist/index.html
 
 dist/%.html: article.%.md layout.sh

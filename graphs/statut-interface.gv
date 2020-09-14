@@ -1,0 +1,28 @@
+
+digraph finite_state_machine {
+    rankdir=LR;
+    graph [fontname = "arial"];
+    node [fontname = "arial"];
+    edge [fontname = "arial", arrowsize=0.7, arrowhead=open];
+
+
+    node [shape = circle, label="Facture\n(gestion)", color="#0e2356", fontcolor="#0e2356" penwidth=4] facture_gestion;
+    node [shape = circle, label="Facture\n(recours)", color="#00afcb", fontcolor="#00afcb" penwidth=4] facture_recours;
+    node [shape = polygon, sides=6, label="recours nécessaire", color="#00afcb", fontcolor="#00afcb" penwidth=1] recours_necessaire;
+    node [shape = polygon, sides=6, label="procédure en cours", color="#0e2356", fontcolor="#0e2356" penwidth=1] procedure_en_cours;
+
+    subgraph interface {
+      rank = same ; recours_necessaire ; procedure_en_cours;
+    }
+
+    facture_gestion -> recours_necessaire [style="dashed", color="#777777"];
+    recours_necessaire -> facture_recours [style="solid", color="#00afcb"];
+    facture_recours -> procedure_en_cours [style="dashed", color="#777777"];
+    procedure_en_cours -> facture_gestion [style="solid", color="#0e2356"];
+
+}
+
+
+
+
+

@@ -12,9 +12,11 @@ ou de résilience de la conception technique. Bref : **Les statuts, ça pue**.
 Les statuts, ça se lit
 ----------------------
 
-Dans les points que nous avons abordés jusqu'ici, il revient un élément récurrent : on n'écrit pas un statut. En tout
-cas nos utilisateurs n'expriment pas cette intention (sauf cas particuliers, voir [Limites](#limites)). En revanche,
-les statuts font bel et bien partie du _Langage Omniprésent_ décrit
+Dans les articles précédents, nous avons vu comment, en analysant une machine à états, il était préférable de privilégier
+les **verbes** qui y figurent pour transcrire nos [_User Stories_](https://blog.octo.com/les-statuts-ca-pue-part-1-fini-comme-un-automate/)
+et dans nos [tests de recette](https://blog.octo.com/les-statuts-ca-pue-part-2-ciselage-en-us/).
+Il apparait alors un élément récurrent : on n'écrit pas un statut. En tout cas nos utilisateurs n'expriment pas cette
+intention [<sup>1</sup>](#note-1). En revanche, les statuts font bel et bien partie du _Langage Omniprésent_ décrit
 dans [DDD](https://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/).
 Ils sont essentiels à la compréhension partagée du métier de notre système d'informations. Quelle est alors leur place
 dans notre conception ?
@@ -107,14 +109,50 @@ Ici il s'agit des relances et des recours.
 Il est également à noter que ce statut n'a pas de sens en dehors de l'aide à la décision, il est utilisé uniquement pour
 de la **consultation**.
 
-A l'inverse, on peut imaginer qu'atteindre ce statut est encore une fois le résultat d'une suite de transitions. On peut
-alors décrire les commandes associées :
+### L'interface entre domaines métiers
 
-> _En tant qu'agent de facturation, je veux demander un recours juridique afin d'arrêter le cycle de relances infructueuses_
+Nous remarquons que nous avons délimité une **frontière entre 2 domaines fonctionnels** ! Dans les exemples précédents,
+l'avènement d'un status `recours_nécessaire` permet de fusionner le détail de plusieurs statuts de gestion en un seul.
+C'est ce statut qui est intéressant pour le domaine voisin du recours juridique. Les utilisateurs de ce domaine fonctionnel
+n'ont qu'à _lire_ les dossiers qui correspondent à ce statut, sans se préoccuer du détail.
+On peut le formaliser comme ceci par exemple :
 
-Nous remarquons que nous avons délimité une **frontière entre 2 domaines fonctionnels** ! Cela peut nous permettre de
-découper notre diagramme d'automate en plusieurs sections et de prioriser notre modélisation en se focalisant sur
-un seul de ces domaines.
+    recours_nécessaire = délai_échu | montant_insuffisant
+
+On remarque également que cela signifie qu'une facture peut avoir 2 statuts différents à un moment donné. En effet,
+une facture peut très bien apparaître à la fois dans la liste des factures échues et dans la liste des factures
+nécessitant un recours juridique. Ce sont des utilisateurs différents en revanche qui consultent ces 2 listes.
+
+Une intuition du _Domain-Driven Design_ consiste à modéliser ceci sous la forme de 2 _contextes_ différents, chacun
+ayant une seule entité désignant une _facture_ qui peut se trouver dans un état à la fois, dans chaque contexte.
+Ceux-ci sont appelés _Bounded Context_ et servent à encapsuler une certaine complexité fonctionnelle que les autres
+contextes n'ont pas besoin de connaître.
+
+Ceci implique alors de définir quel sous-ensemble d'informations transitent
+entre ces contextes. C'est bien là que nos statuts peuvent jouer un rôle : en tant que composant de **l'interface** 
+qui lie les _Bounded Contexts_ entre eux.
+
+![Les statuts en tant qu'interface entre contextes](./statut-interface.png)
+
+Pour reprendre l'exemple précédent, les utilisateurs qui se chargent des recours juridiques ont un travail facilité
+en pouvant consulter rapidement les factures qui en nécessitent. Ils pourront alors gérer tout un cycle de vie propre
+au domaine des procédures juridiques. De même, les utilisateurs qui gèrent les factures au quotidien peuvent voir
+un statut `procédure_en_cours` sur certaines factures, sans pour autant s'intéresser au détail des procédures.
+
+En faisant un maximum de suppositions sur un domaine juridique que je ne maitrise pas, on peut par exemple avoir :
+
+    procédure_en_cours = greffes_saisies | accusé_reception_tribunal | audience_planifiée
+
+En termes plus formels, on dira qu'un statut est une _projection_ d'un ensemble de données. En d'autres termes,
+réduire des informations sur plusieurs dimensions (identifiant, statut, ressources liées, historique, etc.) à un
+nombre plus réduit de dimensions. Pour des statuts, on cherche à réduire à une seule dimension discrète. Si toutes,
+les bonnes données sont disponibles, alors il est facile de déduire de manière déterministe le statut d'une ressource.
+Pour caricaturer, disons qu'on peut calculer le statut d'une ressource avec une requête SQL bien calibrée.
+C'est donc une opération de **lecture pure**.
+
+Attention tout de même, les statuts peuvent consituer une partie de l'interface d'un contexte. En revanche, l'interface
+d'un contexte ne peut pas se réduire un ensemble de statuts et tous les statuts n'ont pas vocation à faire partie de
+l'interface.
 
 ### En résumé
 
@@ -128,5 +166,12 @@ lui sont associées. Le corollaire, c'est qu'il devient alors impossible de forc
 d'une ressource sans décrire ces ressources associées. En poussant encore plus loin, on peut conceptualiser certaines
 de nos transitions comme des créations, des suppressions ou des modifications de ressources associées.
 
+Pour maitriser cette complexité, on peut alors aussi considérer les statuts comme une partie de l'interface qui existe
+entre plusieurs _Bounded Contexts._
+
 On peut résumer ces considérations par ce mantra : « **les statuts, c'est en lecture seule** »
 
+Dans le prochain article, nous intéresserons aux 2 différents cas dans lesquels nous pouvons _écrire_ un statut
+justement.
+
+<a name="note-1">[1]: </a> _Il existe des exceptions evidemment ! Nous en parlerons (enfin) dans l'article suivant_

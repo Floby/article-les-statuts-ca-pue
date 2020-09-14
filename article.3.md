@@ -1,4 +1,4 @@
-Les statuts, ça pue. Partie 3 : Les statuts, ça se lit
+Les statuts, ça pue (part. 3) : Les statuts, ça se lit
 ======================================================
 
 Nous avons souvent dans nos modélisations, nos schémas, nos _user stories_, nos bases de données et

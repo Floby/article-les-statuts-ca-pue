@@ -69,7 +69,7 @@ Les bonnes actions sont celles qu'il **faut** faire, qu'ils **peuvent** faire et
 On peut également imaginer le cas d'une autre équipe, beaucoup plus réduite, où c'est la même personne qui s'occupe de
 toutes les factures. Il peut alors être légitime de prioriser d'autres fonctionnalités du type :
 
-> _En tant qu'agent de facturation, je veux lister les actions qu'il est possible de faire sur une commande, afin de la traîter_
+> _En tant qu'agent de facturation, je veux lister les actions qu'il est possible de faire sur une commande, afin de la traiter_
 
 ### L'aide à la conception !
 
@@ -114,7 +114,7 @@ de la **consultation**.
 Nous remarquons que nous avons délimité une **frontière entre 2 domaines fonctionnels** ! Dans les exemples précédents,
 l'avènement d'un status `recours_nécessaire` permet de fusionner le détail de plusieurs statuts de gestion en un seul.
 C'est ce statut qui est intéressant pour le domaine voisin du recours juridique. Les utilisateurs de ce domaine fonctionnel
-n'ont qu'à _lire_ les dossiers qui correspondent à ce statut, sans se préoccuer du détail.
+n'ont qu'à _lire_ les dossiers qui correspondent à ce statut, sans se préoccuper du détail.
 On peut le formaliser comme ceci par exemple :
 
     recours_nécessaire = délai_échu | montant_insuffisant

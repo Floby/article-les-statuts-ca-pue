@@ -15,7 +15,7 @@ Les statuts, ça se lit
 Dans les articles précédents, nous avons vu comment, en analysant une machine à états, il était préférable de privilégier
 les **verbes** qui y figurent pour transcrire nos [_User Stories_](https://blog.octo.com/les-statuts-ca-pue-part-1-fini-comme-un-automate/)
 et dans nos [tests de recette](https://blog.octo.com/les-statuts-ca-pue-part-2-ciselage-en-us/).
-Il apparait alors un élément récurrent : on n'écrit pas un statut. En tout cas nos utilisateurs n'expriment pas cette
+Il apparaît alors un élément récurrent : on n'écrit pas un statut. En tout cas nos utilisateurs n'expriment pas cette
 intention [<sup>1</sup>](#note-1). En revanche, les statuts font bel et bien partie du _Langage Omniprésent_ décrit
 dans [DDD](https://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/).
 Ils sont essentiels à la compréhension partagée du métier de notre système d'informations. Quelle est alors leur place
@@ -35,7 +35,7 @@ Changeons un peu de domaine et parlons factures :
 (_J'aime les fonctionnalités comptables car elles sont faciles à prioriser par la valeur !_)
 
 On peut très bien imaginer que les actions « recevoir un paiement » et « signaler un retard » puissent être automatiques,
-non n'allons donc pas spécialement en parler ici.
+nous n'allons donc pas spécialement en parler ici.
 
 L'aide à la décision peut alors se décliner en 2 cas de figure :
 
@@ -153,6 +153,28 @@ C'est donc une opération de **lecture pure**.
 Attention tout de même, les statuts peuvent consituer une partie de l'interface d'un contexte. En revanche, l'interface
 d'un contexte ne peut pas se réduire un ensemble de statuts et tous les statuts n'ont pas vocation à faire partie de
 l'interface.
+
+### Pourquoi pas écrire alors ?
+
+Au vu des paragraphes précédents, on peut être tenté de se dire que si les statuts servent de vecteur d'informations
+entre contextes (et donc entre équipes dans notre exemple), alors il peut être légitime que l'utilisateur Bob puisse
+demander l'écriture du statut `recours_nécessaire` explicitement dans le système à l'attention de Charlotte. C'est un
+choix d'implémentation possible mais présente les limites suivantes :
+
++ Où sont les règles métiers qui déterminent qu'un recours est nécessaire ? Dans le cas présent : dans la tête de Bob.
+  Bien que Bob connaisse bien son travail, il n'est pas impossible qu'il soit absent, indisposé ou confus et n'applique
+  pas toujours les mêmes règles. C'est certes l'opportunité de laisser un jugement humain dans la procédure, mais notre
+  système ne peut alors plus être garant de cette procédure.
+
++ Comment gérer les écritures concourantes ? Que se passe-t-il si 2 utilisateurs veulent appliquer un statut différent
+  à une même facture ? Pour le statut `paiement_reçu` 3 options sont possibles comme statut suivant. Que se passe-t-il
+  si 3 personnes, se basant sur cette même information, prennent des décision différentes quant au statut suivant ?
+
++ Comment gérer les statuts multiples ? Une facture peut très bien nécessiter un recours et une relance à la fois.
+  L'information `recours_nécessaire` ne s'adresse qu'à un autre contexte et n'as pas forcément de sens pour les autres.
+
+Enfin, si notre système porte aussi peut de valeur que _« faire passer des messages préformattés entre équipes »,_
+alors il faut s'interroger sur l'opportunité d'utiliser des e-mail plutôt que de développer un outil _ad hoc._
 
 ### En résumé
 

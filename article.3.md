@@ -139,9 +139,13 @@ en pouvant consulter rapidement les factures qui en nécessitent. Ils pourront a
 au domaine des procédures juridiques. De même, les utilisateurs qui gèrent les factures au quotidien peuvent voir
 un statut `procédure_en_cours` sur certaines factures, sans pour autant s'intéresser au détail des procédures.
 
-En faisant un maximum de suppositions sur un domaine juridique que je ne maitrise pas, on peut par exemple avoir :
+En faisant quelques suppositions sur un domaine juridique que je ne maitrise pas, on peut par exemple avoir :
 
     procédure_en_cours = greffes_saisies | accusé_reception_tribunal | audience_planifiée
+
+Les différentes contextes rendent disponibles entre eux une information _synthétique,_ par l'intermédiaire d'un statut,
+de leur considérations internes. Cette synthèse est régie par les règles métiers propres à chaque contexte. Ce sont
+ces règles qui constituent une partie de la valeur de noter système.
 
 En termes plus formels, on dira qu'un statut est une _projection_ d'un ensemble de données. En d'autres termes,
 réduire des informations sur plusieurs dimensions (identifiant, statut, ressources liées, historique, etc.) à un
@@ -180,7 +184,9 @@ alors il faut s'interroger sur l'opportunité d'utiliser des e-mail plutôt que 
 
 Les statuts prennent tout leur sens dans les scénarios de **Consultation**.
 Ils nous permettent d'exprimer facilement quelles actions nos utilisateurs peuvent lancer en fonction de leur rôle.
-Ils leur permettent également de choisir efficacement quelles commandes ils doivent lancer.
+Ils leur permettent également de choisir efficacement quelles commandes ils doivent lancer. Ce sont les statuts qui
+aident les utilisateurs à apprivoiser la complexité du système par l'attribution d'un vocabulaire spécifique à une
+information synthétique.
 
 En revanche, il y a des limites. L'historique d'une ressource peut être complexe à décrire pour atteindre un statut
 donné et il sera alors peut-être plus facile d'exprimer le statut d'une ressource en fonction d'autres ressources qui 

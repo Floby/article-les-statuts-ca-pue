@@ -154,11 +154,11 @@ les bonnes données sont disponibles, alors il est facile de déduire de manièr
 Pour caricaturer, disons qu'on peut calculer le statut d'une ressource avec une requête SQL bien calibrée.
 C'est donc une opération de **lecture pure**.
 
-Attention tout de même, les statuts peuvent consituer une partie de l'interface d'un contexte. En revanche, l'interface
+Attention tout de même, les statuts peuvent constituer une partie de l'interface d'un contexte. En revanche, l'interface
 d'un contexte ne peut pas se réduire un ensemble de statuts et tous les statuts n'ont pas vocation à faire partie de
 l'interface.
 
-### Pourquoi pas écrire alors ?
+### Pourquoi ne pas écrire alors ?
 
 Au vu des paragraphes précédents, on peut être tenté de se dire que si les statuts servent de vecteur d'informations
 entre contextes (et donc entre équipes dans notre exemple), alors il peut être légitime que l'utilisateur Bob puisse
@@ -172,13 +172,13 @@ choix d'implémentation possible mais présente les limites suivantes :
 
 + Comment gérer les écritures concourantes ? Que se passe-t-il si 2 utilisateurs veulent appliquer un statut différent
   à une même facture ? Pour le statut `paiement_reçu` 3 options sont possibles comme statut suivant. Que se passe-t-il
-  si 3 personnes, se basant sur cette même information, prennent des décision différentes quant au statut suivant ?
+  si 3 personnes, se basant sur cette même information, prennent des décisions différentes quant au statut suivant ?
 
 + Comment gérer les statuts multiples ? Une facture peut très bien nécessiter un recours et une relance à la fois.
-  L'information `recours_nécessaire` ne s'adresse qu'à un autre contexte et n'as pas forcément de sens pour les autres.
+  L'information `recours_nécessaire` ne s'adresse qu'à un autre contexte et n'a pas forcément de sens pour les autres.
 
-Enfin, si notre système porte aussi peut de valeur que _« faire passer des messages préformattés entre équipes »,_
-alors il faut s'interroger sur l'opportunité d'utiliser des e-mail plutôt que de développer un outil _ad hoc._
+Enfin, si notre système porte aussi peu de valeur que _« faire passer des messages préformattés entre équipes »,_
+alors il faut s'interroger sur l'opportunité d'utiliser des e-mails plutôt que de développer un outil _ad hoc._
 
 ### En résumé
 

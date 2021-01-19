@@ -165,20 +165,21 @@ entre contextes (et donc entre équipes dans notre exemple), alors il peut être
 demander l'écriture du statut `recours_nécessaire` explicitement dans le système à l'attention de Charlotte. C'est un
 choix d'implémentation possible mais présente les limites suivantes :
 
-+ Où sont les règles métiers qui déterminent qu'un recours est nécessaire ? Dans le cas présent : dans la tête de Bob.
++ Où sont les règles métiers qui déterminent qu'un recours est nécessaire ? Dans le cas présent, la tête de Bob.
   Bien que Bob connaisse bien son travail, il n'est pas impossible qu'il soit absent, indisposé ou confus et n'applique
   pas toujours les mêmes règles. C'est certes l'opportunité de laisser un jugement humain dans la procédure, mais notre
   système ne peut alors plus être garant de cette procédure.
 
 + Comment gérer les écritures concourantes ? Que se passe-t-il si 2 utilisateurs veulent appliquer un statut différent
-  à une même facture ? Pour le statut `paiement_reçu` 3 options sont possibles comme statut suivant. Que se passe-t-il
+  à une même facture ? Pour le statut `paiement_reçu`, 3 options sont possibles comme statut suivant. Que se passe-t-il
   si 3 personnes, se basant sur cette même information, prennent des décisions différentes quant au statut suivant ?
 
 + Comment gérer les statuts multiples ? Une facture peut très bien nécessiter un recours et une relance à la fois.
   L'information `recours_nécessaire` ne s'adresse qu'à un autre contexte et n'a pas forcément de sens pour les autres.
 
-Enfin, si notre système porte aussi peu de valeur que _« faire passer des messages préformattés entre équipes »,_
+Enfin, si notre système apporte aussi peu de valeur que _« faire passer des messages préformattés entre équipes »,_
 alors il faut s'interroger sur l'opportunité d'utiliser des e-mails plutôt que de développer un outil _ad hoc._
+D'ailleurs, c'est probablement l'opportunité de demander aux équipes ce qu'elles en pensent 😉.
 
 ### En résumé
 

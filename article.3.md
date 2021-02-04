@@ -117,7 +117,10 @@ C'est ce statut qui est intéressant pour le domaine voisin du recours juridique
 n'ont qu'à _lire_ les dossiers qui correspondent à ce statut, sans se préoccuper du détail.
 On peut le formaliser comme ceci par exemple :
 
-    recours_nécessaire = délai_échu | montant_insuffisant
+
+```text
+recours_nécessaire = délai_échu | montant_insuffisant
+```
 
 On remarque également que cela signifie qu'une facture peut avoir 2 statuts différents à un moment donné. En effet,
 une facture peut très bien apparaître à la fois dans la liste des factures échues et dans la liste des factures
@@ -141,7 +144,9 @@ un statut `procédure_en_cours` sur certaines factures, sans pour autant s'inté
 
 En faisant quelques suppositions sur un domaine juridique que je ne maitrise pas, on peut par exemple avoir :
 
-    procédure_en_cours = greffes_saisies | accusé_reception_tribunal | audience_planifiée
+```text
+procédure_en_cours = greffes_saisies | accusé_reception_tribunal | audience_planifiée
+```
 
 Les différentes contextes rendent disponibles entre eux une information _synthétique,_ par l'intermédiaire d'un statut,
 de leur considérations internes. Cette synthèse est régie par les règles métiers propres à chaque contexte. Ce sont
